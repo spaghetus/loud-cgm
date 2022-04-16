@@ -15,8 +15,8 @@ if (!process.env.USERNAME || !process.env.PASSWORD) {
 	process.exit(1);
 }
 
-const LOW = process.env.LOW || 40;
-const HIGH = process.env.HIGH || 200;
+const LOW = process.env.LOW || 50;
+const HIGH = process.env.HIGH || 250;
 
 const { read } = DexcomApiClient({
 	username: process.env.USERNAME,
