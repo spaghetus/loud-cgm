@@ -1,0 +1,25 @@
+{
+  "name": "loud_cgm",
+  "version": "1.0.0",
+  "description": "a program that watches your dexcom and makes loud noises when you fuck it up",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spaghetus/loud-cgm.git"
+  },
+  "author": "Willow Carlson-Huber",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/spaghetus/loud-cgm/issues"
+  },
+  "homepage": "https://github.com/spaghetus/loud-cgm#readme",
+  "dependencies": {
+    "@diakem/dexcom-api-client": "^0.1.5",
+    "alert": "^5.0.10",
+    "dotenv": "^16.0.0",
+    "play": "^0.5.0"
+  }
+}
