@@ -18,7 +18,7 @@ if (!process.env.USERNAME || !process.env.PASSWORD) {
 const LOW = process.env.LOW || 50;
 const HIGH = process.env.HIGH || 250;
 
-const { read } = DexcomApiClient({
+const { observe } = DexcomApiClient({
 	username: process.env.USERNAME,
 	password: process.env.PASSWORD,
 	server: "US",
@@ -26,17 +26,18 @@ const { read } = DexcomApiClient({
 play.on('error', () => {
 	console.error("error playing sound");
 	alert("YOUR SOUND IS BROKEN! PLEASE FIX IT!");
-})
+});
 (async () => {
 	while (true) {
-		let data = await read();
-		let last_data = data[data.length - 1];
-		console.log(`${last_data.value}`)
-		if (last_data.value < LOW || last_data.value > HIGH) {
-			play.sound('./noise.mp3');
-		}
-
-		// wait five minutes before checking again
-		await new Promise(resolve => setTimeout(resolve, 5*60*1000));
+		await observe({
+			maxAttempts: 50,
+			delay: 5 * 60 * 1000,
+			listener: data => {
+				console.log(`${data.value}`)
+				if (data.value < LOW || data.value > HIGH) {
+					play.sound('./noise.mp3');
+				}
+			}
+		})
 	}
 })()
