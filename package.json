@@ -19,7 +19,11 @@
   "dependencies": {
     "@diakem/dexcom-api-client": "^0.1.5",
     "alert": "^5.0.10",
+    "alert-node": "^5.0.3",
     "dotenv": "^16.0.0",
-    "play": "^0.5.0"
+    "play-sound": "^1.1.5"
+  },
+  "devDependencies": {
+    "@babel/runtime": "^7.17.9"
   }
 }
