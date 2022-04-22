@@ -27,7 +27,7 @@ require('dotenv').config();
 	
 	await observe({
 		maxAttempts: 50,
-		delay: 5 * 60 * 1000,
+		delay: 2000,
 		listener: data => {
 			console.log(`${data.value}`)
 			if (data.value < LOW || data.value > HIGH) {
