@@ -19,21 +19,20 @@ require('dotenv').config();
 	const LOW = process.env.LOW || 50;
 	const HIGH = process.env.HIGH || 250;
 
-	const { read } = DexcomApiClient({
+	const { observe } = DexcomApiClient({
 		username: process.env.USERNAME,
 		password: process.env.PASSWORD,
 		server: "US",
 	});
 	
-	while (true) {
-		let data = await read();
-		let last_data = data[data.length - 1];
-		console.log(`${last_data.value}`)
-		if (last_data.value < LOW || last_data.value > HIGH) {
-			player.play('./noise.wav', function (err) { alert("YOUR SOUND IS BROKEN PROBABLY?") });
+	await observe({
+		maxAttempts: 50,
+		delay: 2000,
+		listener: data => {
+			console.log(`${data.value}`)
+			if (data.value < LOW || data.value > HIGH) {
+				play.sound('./noise.mp3');
+			}
 		}
-
-		// wait five minutes before checking again
-		await new Promise(resolve => setTimeout(resolve, 5*60*1000));
-	}
+	})
 })()
